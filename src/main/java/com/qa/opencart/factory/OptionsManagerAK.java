@@ -1,17 +1,16 @@
 package com.qa.opencart.factory;
-
 import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-public class OptionsManager {
+public class OptionsManagerAK {
 	private Properties prop;
 	private ChromeOptions co;	
 	private FirefoxOptions fo;
 
 	
-	public OptionsManager(Properties prop) {
+	public OptionsManagerAK(Properties prop) {
 		this.prop = prop;
 	}
 	
@@ -41,6 +40,4 @@ public class OptionsManager {
 			}
 		return fo;
 	}
-	
-	
 }

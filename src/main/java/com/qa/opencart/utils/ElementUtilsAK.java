@@ -1,9 +1,9 @@
 package com.qa.opencart.utils;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -20,19 +20,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.qa.opencart.exceptions.ElementUtilException;
-import com.qa.opencart.factory.DriverFactory;
-import com.qa.opencart.factory.DriverFactoryAK;
-
-public class ElementUtil {
-
+public class ElementUtilsAK {
 	private WebDriver driver;
-	private JavaScriptUtil jsUtil;
-	public static final Logger log = Logger.getLogger(ElementUtil.class);
 
-	public ElementUtil(WebDriver driver) {
+	public ElementUtilsAK(WebDriver driver) {
 		this.driver = driver;
-		jsUtil = new JavaScriptUtil(driver);
 	}
 
 	public By getBy(String locatorType, String locatorValue) {
@@ -78,17 +70,7 @@ public class ElementUtil {
 	}
 
 	public WebElement getElement(By locator) {
-		WebElement element = null;
-		try {
-			element = driver.findElement(locator);
-		} catch (NoSuchElementException e) {
-			e.printStackTrace();
-			throw new ElementUtilException("element is not found with the locator: " + locator);
-		}
-		if (Boolean.parseBoolean(DriverFactory.highlight)) {
-			jsUtil.flash(element);
-		}
-		return element;
+		return driver.findElement(locator);
 	}
 
 	public List<WebElement> getElements(By locator) {
@@ -96,10 +78,7 @@ public class ElementUtil {
 	}
 
 	public void doSendKeys(By locator, String value) {
-		log.info("locator is : " + locator + " value " + value);
-		WebElement ele = getElement(locator);
-		ele.clear();
-		ele.sendKeys(value);
+		getElement(locator).sendKeys(value);
 	}
 
 	public void doClick(By locator) {
@@ -535,23 +514,28 @@ public class ElementUtil {
 		}
 
 	}
-
+	
 	public WebDriver waitForFrameWithFluentWait(By locator, int timeOut, int pollingTime) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingTime)).ignoring(NoSuchFrameException.class);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(timeOut))
+				.pollingEvery(Duration.ofSeconds(pollingTime))
+				.ignoring(NoSuchFrameException.class);
 
 		return wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
 	}
-
+	
 	public Alert waitForAlertFluentWait(int timeOut, int pollingTime) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingTime)).ignoring(NoAlertPresentException.class);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(timeOut))
+				.pollingEvery(Duration.ofSeconds(pollingTime))
+				.ignoring(NoAlertPresentException.class);
 
 		return wait.until(ExpectedConditions.alertIsPresent());
 	}
 
 	public WebElement waitForElementPrsentWithFluentWait(By locator, int timeOut, int pollingTime) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeOut))
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(timeOut))
 				.pollingEvery(Duration.ofSeconds(pollingTime))
 				.ignoring(NoSuchElementException.class, ElementNotInteractableException.class);
 
@@ -559,11 +543,11 @@ public class ElementUtil {
 	}
 
 	public WebElement waitForElementVisibleWithFluentWait(By locator, int timeOut, int pollingTime) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingTime)).ignoring(NoSuchElementException.class);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(timeOut))
+				.pollingEvery(Duration.ofSeconds(pollingTime))
+				.ignoring(NoSuchElementException.class);
 
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
-
 }
-

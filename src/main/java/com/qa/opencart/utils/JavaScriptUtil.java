@@ -1,11 +1,10 @@
 package com.qa.opencart.utils;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class JavaScriptUtil {
-	WebDriver driver;
+	private WebDriver driver;
 
 	public JavaScriptUtil(WebDriver driver) {
 		this.driver = driver;
@@ -13,7 +12,7 @@ public class JavaScriptUtil {
 
 	public void flash(WebElement element) {
 		String bgcolor = element.getCssValue("backgroundColor");
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 10; i++) {
 			changeColor("rgb(0,200,0)", element);// 1
 			changeColor(bgcolor, element);// 2
 		}
@@ -83,4 +82,7 @@ public class JavaScriptUtil {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].style.border='3px solid red'", element);
 	}
+	
+	
+
 }
