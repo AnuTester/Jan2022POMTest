@@ -15,13 +15,18 @@
 
 	</listeners>
 
-	<test name="Open Cart Login Page Test _ chrome_89">
-		<parameter name="browser" value="chrome1" />
-		<parameter name="browserversion" value="89.0" />
+	<test name="Open Cart Login Page Test _ chrome_113">
+		<parameter name="browser" value="chrome" />
+		<parameter name="browserversion" value="113" />
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
 	</test>
+	
+	<test name="Open Cart Login Page Negative Test _ chrome"> <parameter 
+		name="browser" value="chrome" />
+		<parameter name="browserversion" value="113" />
+		 <classes> <class name="com.qa.opencart.tests.LoginPageNegativeTest" /> </classes> </test> 
 
 	<!-- <test name="Open Cart Login Page Test _ chrome_91">
 		<parameter name="browser" value="chrome" />

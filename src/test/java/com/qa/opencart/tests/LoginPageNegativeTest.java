@@ -34,6 +34,7 @@ public class LoginPageNegativeTest extends BaseTest{
 	@Description("login Title Test with invalid credentials.....")
 	@Severity(SeverityLevel.NORMAL)
 	public void loginInvalidTest(String username, String password) {
+		System.out.println("un "+ username + " pwd " +password);
 		Assert.assertTrue(loginPage.doInvalidLogin(username, password), Errors.LOGIN_PAGE_ERROR_MESSG_NOT_DISPLAYED);
 	}
 	
