@@ -12,7 +12,7 @@ public class Constants {
 
 
 	
-	public static final int DEFAULT_TIME_OUT = 20;
+	public static final int DEFAULT_TIME_OUT = 5;
 
 	public static final String DEMO_PAGE_TITLE = "Account DEMO";
 
