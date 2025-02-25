@@ -1,5 +1,7 @@
 package com.qa.opencart.factory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,8 +24,13 @@ public class OptionsManager {
 		
 			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
 				co.setPlatformName("linux");
-				co.setCapability("enableVNC", true);
+//				co.setCapability("enableVNC", true);
 				co.setBrowserVersion(prop.getProperty("browserversion"));
+				Map<String, Object> cloudOptions = new HashMap<>();
+//				cloudOptions.put("build", myTestBuild);
+//				cloudOptions.put("name", myTestName);
+				cloudOptions.put("enableVNC",true);
+				co.setCapability("cloud:options", cloudOptions);
 			}
 		
 		return co;
